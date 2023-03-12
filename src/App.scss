@@ -1,0 +1,81 @@
+.app-container {
+   .header-container {
+      .navbar {
+         z-index: 10;
+         margin-top: 16px;
+         background-color: rgba(0, 0, 0, 0) !important;
+         .nav-link {
+            &.active {
+               color: #00bff0;
+            }
+         }
+      }
+
+      .btn-login,
+      .btn-logout {
+         border-radius: 4px;
+         border: 1px solid #262627;
+         padding: 8px 16px;
+         text-align: center;
+         margin-right: 16px;
+      }
+      .btn-logout {
+         background-color: #262627;
+         color: #fff;
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+   }
+   .homepage-container {
+      .homepage-content {
+         position: relative;
+         padding-left: 100px;
+         padding-top: 86px;
+         line-height: 76px;
+
+         .title {
+            width: 544px;
+            font-size: 64px;
+            margin-bottom: 24px;
+         }
+         .desc {
+            width: 484px;
+            font-size: 24px;
+            line-height: 31px;
+            margin-bottom: 40px;
+         }
+         .btn-getstarted {
+            border-radius: 4px;
+            border: 1px solid #262627;
+            padding: 0px 16px;
+            background-color: #262627;
+            color: #fff;
+            height: 50px;
+            line-height: 50px;
+         }
+      }
+   }
+}
+
+video {
+   position: fixed;
+   bottom: 0;
+   width: 100vw;
+}
+
+@media (min-width: 1200px) {
+   .container,
+   .container-lg,
+   .container-md,
+   .container-sm,
+   .container-xl {
+      max-width: 1300px !important;
+   }
+}
+// Resr setup
+input,
+button {
+   border: none;
+   outline: none;
+}
