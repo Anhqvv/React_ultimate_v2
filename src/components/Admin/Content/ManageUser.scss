@@ -1,31 +1,40 @@
 .manage-user-container {
-   .users-content {
-   }
-}
-
-.modal-add-user {
-   .img-preview {
-      height: 150px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #ccc;
-      img {
-         max-width: 100%;
-         max-height: 100%;
-      }
-   }
-   .label-upload {
+  .users-content {
+  }
+  .btn-add-new {
+    button {
+      font-weight: 600;
+      font-size: 25px;
       display: flex;
       align-items: center;
       gap: 5px;
-      width: fit-content;
-      border-radius: 5px;
-      padding: 8px 16px;
-      cursor: pointer;
-      background-color: #eeeeee;
-      &:hover {
-        background-color: #dcdcdc;
-      }
-   }
+    }
+  }
+}
+
+.modal-add-user {
+  .img-preview {
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ccc;
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+  .label-upload {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+    border-radius: 5px;
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: #eeeeee;
+    &:hover {
+      background-color: #dcdcdc;
+    }
+  }
 }
