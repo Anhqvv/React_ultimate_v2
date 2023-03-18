@@ -10,6 +10,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import HomePage from './components/Home/HomePage'
 import ManageUser from './components/Admin/Content/ManageUser'
 import Dashboard from './components/Admin/Content/Dashboard'
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
