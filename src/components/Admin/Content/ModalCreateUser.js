@@ -1,4 +1,3 @@
-import axios from 'axios'
 import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
@@ -7,7 +6,7 @@ import { toast } from 'react-toastify'
 import { postCreateNewUser } from '../../../services/apiServices'
 
 function ModalCreateUser (props) {
-  const { show, handleClose } = props
+  const { show, handleClose, fetchAllUser } = props
   const handleCloseModal = () => {
     handleClose()
     setEmail('')
@@ -59,6 +58,7 @@ function ModalCreateUser (props) {
       toast.error(data.EM)
     }
     handleCloseModal()
+    await fetchAllUser()
   }
 
   return (

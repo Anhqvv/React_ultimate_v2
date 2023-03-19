@@ -16,3 +16,7 @@ export const postCreateNewUser = async (
 
   return await axios.post('api/v1/participant', formData)
 }
+
+export const getAllUser = async () => {
+    return await axios.get('api/v1/participant/all')
+}

@@ -2,7 +2,9 @@ import ModalCreateUser from './ModalCreateUser'
 import { FcPlus } from 'react-icons/fc'
 
 import './ManageUser.scss'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import TableUser from './TableUser'
+import { getAllUser } from '../../../services/apiServices'
 //manage user
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false)
@@ -12,6 +14,18 @@ const ManageUser = () => {
   const handleClose = () => {
     setShowModalCreateUser(false)
   }
+
+  const [listUsers, setListUsers] = useState('')
+
+  const fetchAllUser = async () => {
+    const data = await getAllUser()
+    if (data && data.EC === 0) {
+      setListUsers(data.DT)
+    }
+  }
+  useEffect(() => {
+    fetchAllUser()
+  }, [])
   return (
     <div className='manage-user-container'>
       <div className='title'>Manage User</div>
@@ -22,11 +36,10 @@ const ManageUser = () => {
             Add New User
           </button>
         </div>
-        <div className='table-users'>table users</div>
-        <ModalCreateUser
-          show={showModalCreateUser}
-          handleClose={handleClose}
-        />
+        <div className='table-users-container my-3'>
+          <TableUser listUsers={ listUsers} />
+        </div>
+        <ModalCreateUser show={showModalCreateUser} handleClose={handleClose} fetchAllUser={ fetchAllUser} />
       </div>
     </div>
   )
