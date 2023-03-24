@@ -5,14 +5,23 @@ import './ManageUser.scss'
 import { useEffect, useState } from 'react'
 import TableUser from './TableUser'
 import { getAllUser } from '../../../services/apiServices'
+import ModalUpdateUser from './ModalUpdateUser'
 //manage user
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false)
+  const [showModalUpdateUser, setShowModalUpdateUser] = useState(false)
+  const [dataUpdate, setDataUpdate] = useState({})
   const handleSetShow = () => {
     setShowModalCreateUser(true)
   }
   const handleClose = () => {
     setShowModalCreateUser(false)
+    setShowModalUpdateUser(false)
+  }
+
+  const handleBtnUpdate = user => {
+    setShowModalUpdateUser(true)
+    setDataUpdate(user)
   }
 
   const [listUsers, setListUsers] = useState('')
@@ -26,6 +35,10 @@ const ManageUser = () => {
   useEffect(() => {
     fetchAllUser()
   }, [])
+
+  const resetDataUpdate = () => {
+    setDataUpdate({})
+  }
   return (
     <div className='manage-user-container'>
       <div className='title'>Manage User</div>
@@ -37,9 +50,21 @@ const ManageUser = () => {
           </button>
         </div>
         <div className='table-users-container my-3'>
-          <TableUser listUsers={ listUsers} />
+          <TableUser listUsers={listUsers} handleBtnUpdate={handleBtnUpdate} />
         </div>
-        <ModalCreateUser show={showModalCreateUser} handleClose={handleClose} fetchAllUser={ fetchAllUser} />
+        <ModalCreateUser
+          show={showModalCreateUser}
+          handleClose={handleClose}
+          fetchAllUser={fetchAllUser}
+        />
+        <ModalUpdateUser
+          show={showModalUpdateUser}
+          handleClose={handleClose}
+          dataUpdate={dataUpdate}
+          fetchAllUser={fetchAllUser}
+          resetDataUpdate={resetDataUpdate}
+
+        />
       </div>
     </div>
   )

@@ -18,5 +18,15 @@ export const postCreateNewUser = async (
 }
 
 export const getAllUser = async () => {
-    return await axios.get('api/v1/participant/all')
+  return await axios.get('api/v1/participant/all')
+}
+
+export const putUpdateUser = async (id, username, role, image) => {
+  const formData = new FormData()
+  formData.append('id', id)
+  formData.append('username', username)
+  formData.append('role', role)
+  formData.append('userImage', image)
+
+  return await axios.put('api/v1/participant', formData)
 }
