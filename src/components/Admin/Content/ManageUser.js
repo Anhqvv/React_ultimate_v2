@@ -7,6 +7,7 @@ import TableUser from './TableUser'
 import { getAllUser } from '../../../services/apiServices'
 import ModalUpdateUser from './ModalUpdateUser'
 import ModalViewUser from './ModalViewUser'
+import ModalDeleteUser from './ModalDeleteUser'
 //manage user
 const ManageUser = () => {
   const [showModalCreateUser, setShowModalCreateUser] = useState(false)
@@ -14,6 +15,8 @@ const ManageUser = () => {
   const [showModalviewUser, setShowModalViewUser] = useState(false)
   const [dataView, setDataView] = useState({})
   const [dataUpdate, setDataUpdate] = useState({})
+  const [dataDelete, setDataDelete] = useState({})
+  const [showModalDeleteUser, setShowModalDeleteUser] = useState(false)
   const handleSetShow = () => {
     setShowModalCreateUser(true)
   }
@@ -21,6 +24,7 @@ const ManageUser = () => {
     setShowModalCreateUser(false)
     setShowModalUpdateUser(false)
     setShowModalViewUser(false)
+    setShowModalDeleteUser(false)
   }
 
   const handleBtnUpdate = user => {
@@ -52,6 +56,10 @@ const ManageUser = () => {
     setDataView(user)
     console.log('my data user view', user)
   }
+  const handleBtnDelete = user => {
+    setShowModalDeleteUser(true)
+    setDataDelete(user)
+  }
   return (
     <div className='manage-user-container'>
       <div className='title'>Manage User</div>
@@ -67,6 +75,7 @@ const ManageUser = () => {
             listUsers={listUsers}
             handleBtnUpdate={handleBtnUpdate}
             handleBtnView={handleBtnView}
+            handleBtnDelete={handleBtnDelete}
           />
         </div>
         <ModalCreateUser
@@ -86,6 +95,12 @@ const ManageUser = () => {
           handleClose={handleClose}
           dataView={dataView}
           resetDataView={resetDataView}
+        />
+        <ModalDeleteUser
+          show={showModalDeleteUser}
+          handleClose={handleClose}
+          dataDelete={dataDelete}
+          fetchAllUser={fetchAllUser}
         />
       </div>
     </div>

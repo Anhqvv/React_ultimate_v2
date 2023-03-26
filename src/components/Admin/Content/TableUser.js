@@ -1,5 +1,5 @@
 const TableUser = props => {
-  const { listUsers, handleBtnUpdate, handleBtnView } = props
+  const { listUsers, handleBtnUpdate, handleBtnView, handleBtnDelete } = props
   return (
     <>
       <table className='table table-striped table-bordered table-hover'>
@@ -30,7 +30,7 @@ const TableUser = props => {
                     >
                       Update
                     </button>
-                    <button className='btn btn-danger mx-2'>Delete</button>
+                    <button className='btn btn-danger mx-2' onClick={() => handleBtnDelete(user)}>Delete</button>
                   </td>
                 </tr>
               )

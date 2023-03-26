@@ -30,3 +30,6 @@ export const putUpdateUser = async (id, username, role, image) => {
 
   return await axios.put('api/v1/participant', formData)
 }
+export const deleteUser = async id => {
+  return await axios.delete('api/v1/participant', { data: {id} })
+}
