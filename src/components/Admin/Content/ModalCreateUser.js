@@ -6,7 +6,13 @@ import { toast } from 'react-toastify'
 import { postCreateNewUser } from '../../../services/apiServices'
 
 function ModalCreateUser (props) {
-  const { show, handleClose, fetchAllUser } = props
+  const {
+    show,
+    handleClose,
+    fetchAllUser,
+    fetchAllUserWithPaginate,
+    setCurentPage
+  } = props
   const handleCloseModal = () => {
     handleClose()
     setEmail('')
@@ -58,7 +64,8 @@ function ModalCreateUser (props) {
       toast.error(data.EM)
     }
     handleCloseModal()
-    await fetchAllUser()
+    setCurentPage(1)
+    await fetchAllUserWithPaginate(1)
   }
 
   return (
@@ -112,9 +119,7 @@ function ModalCreateUser (props) {
                 onChange={e => setRole(e.target.value)}
                 value={role}
               >
-                <option selected value='USER'>
-                  USER
-                </option>
+                <option value='USER'>USER</option>
                 <option value='ADMIN'>ADMIN</option>
               </select>
             </div>

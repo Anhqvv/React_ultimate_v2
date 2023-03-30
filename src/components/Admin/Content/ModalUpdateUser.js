@@ -8,7 +8,7 @@ import _ from 'lodash'
 import { putUpdateUser } from '../../../services/apiServices'
 
 function ModalUpdateUser (props) {
-  const { show, handleClose, fetchAllUser, dataUpdate, resetDataUpdate } = props
+  const { show, handleClose, fetchAllUser, dataUpdate, resetDataUpdate,fetchAllUserWithPaginate, currentPage } = props
   const handleCloseModal = () => {
     handleClose()
     setEmail('')
@@ -53,9 +53,8 @@ function ModalUpdateUser (props) {
       if (data && data.EC !== 0) {
         toast.error(data.EM)
       }
-      fetchAllUser()
       handleCloseModal()
-      console.log('my data update', data)
+      fetchAllUserWithPaginate(currentPage)
     }
   }
 

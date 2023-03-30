@@ -25,6 +25,7 @@ const ManageUser = () => {
   const [dataUpdate, setDataUpdate] = useState({})
   const [dataDelete, setDataDelete] = useState({})
   const [showModalDeleteUser, setShowModalDeleteUser] = useState(false)
+  const [currentPage, setCurentPage] = useState(1)
 
   const handleSetShow = () => {
     setShowModalCreateUser(true)
@@ -71,7 +72,6 @@ const ManageUser = () => {
   const handleBtnView = user => {
     setShowModalViewUser(true)
     setDataView(user)
-    console.log('my data user view', user)
   }
   const handleBtnDelete = user => {
     setShowModalDeleteUser(true)
@@ -101,12 +101,17 @@ const ManageUser = () => {
             handleBtnDelete={handleBtnDelete}
             fetchAllUserWithPaginate={fetchAllUserWithPaginate}
             pageCount={pageCount}
+            currentPage={currentPage}
+            setCurentPage={setCurentPage}
           />
         </div>
         <ModalCreateUser
           show={showModalCreateUser}
           handleClose={handleClose}
           fetchAllUser={fetchAllUser}
+          fetchAllUserWithPaginate={fetchAllUserWithPaginate}
+          setCurentPage={setCurentPage}
+          currentPage={currentPage}
         />
         <ModalUpdateUser
           show={showModalUpdateUser}
@@ -114,6 +119,9 @@ const ManageUser = () => {
           dataUpdate={dataUpdate}
           fetchAllUser={fetchAllUser}
           resetDataUpdate={resetDataUpdate}
+          fetchAllUserWithPaginate={fetchAllUserWithPaginate}
+          currentPage={currentPage}
+
         />
         <ModalViewUser
           show={showModalviewUser}
@@ -126,6 +134,8 @@ const ManageUser = () => {
           handleClose={handleClose}
           dataDelete={dataDelete}
           fetchAllUser={fetchAllUser}
+          fetchAllUserWithPaginate={fetchAllUserWithPaginate}
+          setCurentPage={setCurentPage}
         />
       </div>
     </div>
