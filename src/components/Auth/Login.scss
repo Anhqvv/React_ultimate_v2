@@ -1,0 +1,46 @@
+.login-container {
+  .header-login {
+    align-items: center;
+    color: #4c4c4c;
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 24px;
+  }
+  .login-content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    .title {
+      font-size: 26px;
+      text-align: center;
+    }
+    .desc {
+      color: #4c4c4c;
+      font-family: apercu-pro;
+      font-size: 20px;
+      line-height: 24px;
+      margin: 10px 0px 15px;
+      text-align: center;
+    }
+    .form {
+      a {
+        text-decoration: none;
+      }
+      button {
+        width: 100%;
+
+        background-color: #262627;
+        border-radius: 10px;
+        color: #ffffff;
+        font-family: apercu-pro;
+        line-height: 28px;
+      }
+    }
+    .go-homepage {
+        text-align: center;
+        font-weight: 600;
+        font-size: 20px;
+        cursor: pointer;
+    }
+  }
+}
