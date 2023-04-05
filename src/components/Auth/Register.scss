@@ -1,0 +1,28 @@
+.register-container {
+  .title {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .register-password {
+    position: relative;
+    span {
+      position: absolute;
+      top: 15%;
+      right: 10px;
+      cursor: pointer;
+    }
+  }
+
+  .btn-register {
+    width: 100%;
+    font-size: 20px;
+  }
+}
+
+.header-register {
+  align-items: center;
+  color: #4c4c4c;
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px 24px;
+}

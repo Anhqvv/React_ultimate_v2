@@ -2,11 +2,16 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import { NavLink, useNavigate } from 'react-router-dom'
+import './Header.scss'
 
 const Header = () => {
   const navigate = useNavigate();
   const hanldeLogin = () => {
     navigate('/login')
+  }
+
+  const handleSignUp = () => {
+    navigate('/register')
   }
   return (
     <Navbar bg='light' expand='lg'>
@@ -15,8 +20,8 @@ const Header = () => {
           React-Bootstrap
         </NavLink>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
-          <Nav className='mx-auto'>
+        <Navbar.Collapse id='basic-navbar-nav' className='header-collapse'>
+          <Nav>
             <NavLink to='/' className='nav-link'>
               Home
             </NavLink>
@@ -27,9 +32,9 @@ const Header = () => {
               Admin
             </NavLink>
           </Nav>
-          <Nav>
+          <Nav >
             <button className='btn-login' onClick={() => hanldeLogin()}>Log in</button>
-            <button className='btn-logout'>Log out</button>
+            <button className='btn-logout' onClick={() => handleSignUp()}>Sign Up</button>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -1,5 +1,7 @@
 import 'react-pro-sidebar/dist/css/styles.css'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 import {
   ProSidebar,
   Menu,
@@ -26,6 +28,8 @@ import { MdDashboard } from 'react-icons/md'
 import './SideBar.scss'
 
 const SideBar = props => {
+  const navigate = useNavigate()
+
   const { collapsed, toggled, handleToggleSidebar } = props
   return (
     <>
@@ -50,7 +54,7 @@ const SideBar = props => {
             }}
           >
             <DiReact size={'3em'} color={'00bfff'} />
-            <span>React Pro Sidebar</span>
+            <span onClick={() => navigate('/')}>React Pro Sidebar</span>
           </div>
         </SidebarHeader>
 

@@ -20,7 +20,11 @@ const Login = () => {
   }
   return (
     <div className='login-container '>
-      <div className='header-login'>Don't have an account yet?</div>
+      <div className='header-login'>
+        Don't have an account yet?{' '}
+        <button className='btn btn-outline-dark mx-1' onClick={() => navigate('/register')}>Sign-up</button>
+      </div>
+
       <div className='login-content'>
         <div className='title'>QA with TypeForm</div>
         <div className='desc'>Hello, who’s this?</div>

@@ -41,3 +41,6 @@ export const getAllUserWithPaginate = async (page, limit) => {
 export const postSubmitLogin = (email, password) => {
   return axios.post('api/v1/login', { email, password })
 }
+export const postSubmitRegister = (username, email, password) => {
+  return axios.post('api/v1/register', { username, email, password })
+}
