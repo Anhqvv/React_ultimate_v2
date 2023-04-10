@@ -1,7 +1,7 @@
-import axios from 'axios'
 import {
   INCREMENT,
   DECREMENT,
+  FETCH_USER_LOGIN_SUCCESS
 } from './type'
 
 export const increaseCounter = () => {
@@ -13,6 +13,13 @@ export const increaseCounter = () => {
 export const decreaseCounter = () => {
   return {
     type: DECREMENT
+  }
+}
+
+export const doLogin = (data) => {
+  return {
+    type: FETCH_USER_LOGIN_SUCCESS,
+    payload: data
   }
 }
 
