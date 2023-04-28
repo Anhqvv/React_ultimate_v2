@@ -8,7 +8,8 @@ import { BrowserRouter } from 'react-router-dom'
 import Layout from './Layout'
 
 import { Provider } from 'react-redux'
-import { store, persistor } from '../src/redux/store/store'
+// import {store} from '../src/redux/store/store'
+import { store, persistor } from './redux/store/store'
 import { PersistGate } from 'redux-persist/integration/react'
 
 ReactDOM.render(
