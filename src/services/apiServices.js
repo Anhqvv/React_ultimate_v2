@@ -49,3 +49,6 @@ export const postSubmitRegister = (username, email, password) => {
 export const getQuizByParticipant = async () => {
   return await axios.get(`api/v1/quiz-by-participant`)
 }
+export const getQuestionByQuizId = async (id) => {
+  return await axios.get(`api/v1/questions-by-quiz?quizId=${id}`)
+}
