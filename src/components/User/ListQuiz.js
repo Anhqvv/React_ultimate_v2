@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './ListQuiz.scss'
 
-
 const ListQuiz = () => {
   const navigate = useNavigate()
   const [listQuiz, setListQuiz] = useState([])
@@ -17,7 +16,6 @@ const ListQuiz = () => {
   useEffect(() => {
     getQuizData()
   }, [])
-  console.log('listQuiz', listQuiz)
   return (
     <div className='list-quiz-container'>
       {listQuiz &&
@@ -29,11 +27,22 @@ const ListQuiz = () => {
               style={{ width: '18rem' }}
               key={`quiz-${quiz.id}`}
             >
-              <img className='card-img-top' src={`data:image/png;base64, ${quiz.image}`} alt='Card image cap' />
+              <img
+                className='card-img-top'
+                src={`data:image/png;base64, ${quiz.image}`}
+                alt='Card image cap'
+              />
               <div className='card-body'>
                 <h5 className='card-title'>{`Quiz-${quiz.id}`}</h5>
                 <p className='card-text'>{quiz.description}</p>
-                <button className='btn btn-primary' onClick={() => navigate(`/quiz/${quiz.id}`)}>
+                <button
+                  className='btn btn-primary'
+                  onClick={() =>
+                    navigate(`/quiz/${quiz.id}`, {
+                      state: { quizTitle: quiz.description }
+                    })
+                  }
+                >
                   Start Quiz
                 </button>
               </div>
