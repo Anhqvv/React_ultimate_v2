@@ -15,7 +15,6 @@ const DetailQuiz = props => {
 
   const fetchQuestion = async () => {
     const res = await getQuestionByQuizId(quizId)
-    console.log('res', res)
     if (res && res.EC === 0) {
       let rawData = res.DT
       //excute data raw use lodas
@@ -28,21 +27,26 @@ const DetailQuiz = props => {
           value.forEach(item => {
             questionDesciption = item.description
             image = item.image
+            item.answers.isSelected = false
             answers.push(item.answers)
           })
 
-          return { questionId: key, answers, questionDesciption, image }
+          return {
+            questionId: key,
+            answers,
+            questionDesciption,
+            image
+          }
         })
         .value()
       setDataQuiz(data)
     }
   }
-  console.log('data quiz', dataQuiz)
   useEffect(() => {
     fetchQuestion()
   }, [quizId])
   const handlePrev = () => {
-    if (currIndex - 1< 0) {
+    if (currIndex - 1 < 0) {
       return
     }
     setCurrIndex(currIndex - 1)
@@ -51,7 +55,27 @@ const DetailQuiz = props => {
     if (dataQuiz && dataQuiz.length > currIndex + 1) {
       setCurrIndex(currIndex + 1)
     }
-  }
+    }
+    
+    const handleCheckboxFromDad = (quesId, ansId) => {
+        let dataQuizClone = _.cloneDeep(dataQuiz)
+        let question = dataQuizClone.find(item => +item.questionId === +quesId)
+        if (question && question.answers) {
+            console.log('question', question)
+           let updateQuestion =  question.answers.map((item) => {
+                if (+item.id === +ansId) {
+                    item.isSelected = !item.isSelected
+                }
+                return item
+           })
+            question.answers = updateQuestion
+            let index = dataQuizClone.findIndex(item => +item.questionId === +quesId)
+            if (index > -1) {
+                dataQuizClone[index] = question
+                setDataQuiz(dataQuizClone)
+            }
+        }
+    }
   return (
     <div className='detail-quiz-container'>
       <div className='left-content'>
@@ -62,7 +86,8 @@ const DetailQuiz = props => {
         <div className='q-body'>
           <Question
             data={dataQuiz && dataQuiz.length > 0 && dataQuiz[currIndex]}
-            currIndex={currIndex}
+                      currIndex={currIndex}
+                      handleCheckboxFromDad={handleCheckboxFromDad}
           />
         </div>
 
@@ -72,6 +97,9 @@ const DetailQuiz = props => {
           </button>
           <button className='btn btn-primary' onClick={() => handleNext()}>
             Next
+          </button>
+          <button className='btn btn-warning' onClick={() => handleNext()}>
+            Fisnish
           </button>
         </div>
       </div>

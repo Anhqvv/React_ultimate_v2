@@ -17,17 +17,20 @@
     flex-direction: column;
     justify-content: center;
       .question {
+        margin-top: 20px;
         font-size: 25px;
         font-weight: 600;
       }
 
       .q-image {
+        margin-top: 20px;
         width: 300px;
         height: 200px;
       }
     }
 
     .footer {
+      margin-top: 40px;
       display: flex;
       justify-content: center;
       gap: 20px;
