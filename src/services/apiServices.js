@@ -45,10 +45,14 @@ export const postSubmitRegister = (username, email, password) => {
   return axios.post('api/v1/register', { username, email, password })
 }
 
-
 export const getQuizByParticipant = async () => {
   return await axios.get(`api/v1/quiz-by-participant`)
 }
-export const getQuestionByQuizId = async (id) => {
+export const getQuestionByQuizId = async id => {
   return await axios.get(`api/v1/questions-by-quiz?quizId=${id}`)
+}
+
+export const postSubmitQuiz = async data => {
+  console.log('data api', { ...data })
+  return await axios.post(`api/v1/quiz-submit`,data)
 }

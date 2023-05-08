@@ -5,6 +5,8 @@ import { useState } from 'react'
 import _ from 'lodash'
 import './DetailQuiz.scss'
 import Question from './Question'
+import { postSubmitQuiz } from '../../services/apiServices'
+import ModalResult from './ModalResult'
 const DetailQuiz = props => {
   const [dataQuiz, setDataQuiz] = useState([])
   const params = useParams()
@@ -12,6 +14,8 @@ const DetailQuiz = props => {
   const { state } = useLocation()
   const { quizTitle } = state // Read values passed on state
   const [currIndex, setCurrIndex] = useState(0)
+  const [isShowModalResult, setIsShowModalResult] = useState(false)
+  const [dataResult, setDataResult] = useState({})
 
   const fetchQuestion = async () => {
     const res = await getQuestionByQuizId(quizId)
@@ -55,27 +59,59 @@ const DetailQuiz = props => {
     if (dataQuiz && dataQuiz.length > currIndex + 1) {
       setCurrIndex(currIndex + 1)
     }
+  }
+
+  const handleFinish = async () => {
+    let payload = {
+      quizId: +quizId,
+      answers: []
     }
-    
-    const handleCheckboxFromDad = (quesId, ansId) => {
-        let dataQuizClone = _.cloneDeep(dataQuiz)
-        let question = dataQuizClone.find(item => +item.questionId === +quesId)
-        if (question && question.answers) {
-            console.log('question', question)
-           let updateQuestion =  question.answers.map((item) => {
-                if (+item.id === +ansId) {
-                    item.isSelected = !item.isSelected
-                }
-                return item
-           })
-            question.answers = updateQuestion
-            let index = dataQuizClone.findIndex(item => +item.questionId === +quesId)
-            if (index > -1) {
-                dataQuizClone[index] = question
-                setDataQuiz(dataQuizClone)
-            }
+    let answers = []
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach(ques => {
+        let questionId = +ques.questionId
+        let userAnswerId = []
+
+        ques.answers.forEach(ans => {
+          if (ans.isSelected === true) {
+            userAnswerId.push(ans.id)
+          }
+        })
+        answers.push({
+          questionId,
+          userAnswerId
+        })
+      })
+      payload.answers = answers
+
+      let res = await postSubmitQuiz(payload)
+
+      if (res && res.EC === 0) {
+        setIsShowModalResult(true)
+        let data = res?.DT
+        setDataResult(data)
+      }
+    }
+  }
+  const handleCheckboxFromDad = (quesId, ansId) => {
+    let dataQuizClone = _.cloneDeep(dataQuiz)
+    let question = dataQuizClone.find(item => +item.questionId === +quesId)
+    if (question && question.answers) {
+      console.log('question', question)
+      let updateQuestion = question.answers.map(item => {
+        if (+item.id === +ansId) {
+          item.isSelected = !item.isSelected
         }
+        return item
+      })
+      question.answers = updateQuestion
+      let index = dataQuizClone.findIndex(item => +item.questionId === +quesId)
+      if (index > -1) {
+        dataQuizClone[index] = question
+        setDataQuiz(dataQuizClone)
+      }
     }
+  }
   return (
     <div className='detail-quiz-container'>
       <div className='left-content'>
@@ -86,8 +122,8 @@ const DetailQuiz = props => {
         <div className='q-body'>
           <Question
             data={dataQuiz && dataQuiz.length > 0 && dataQuiz[currIndex]}
-                      currIndex={currIndex}
-                      handleCheckboxFromDad={handleCheckboxFromDad}
+            currIndex={currIndex}
+            handleCheckboxFromDad={handleCheckboxFromDad}
           />
         </div>
 
@@ -98,12 +134,17 @@ const DetailQuiz = props => {
           <button className='btn btn-primary' onClick={() => handleNext()}>
             Next
           </button>
-          <button className='btn btn-warning' onClick={() => handleNext()}>
+          <button className='btn btn-warning' onClick={() => handleFinish()}>
             Fisnish
           </button>
         </div>
       </div>
       <div className='right-content'>right content</div>
+      <ModalResult
+        show={isShowModalResult}
+        setShow={setIsShowModalResult}
+        data={dataResult}
+      />
     </div>
   )
 }
